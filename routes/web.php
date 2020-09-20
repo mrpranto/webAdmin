@@ -22,8 +22,9 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('ad-status', 'AdStatusController');
-    Route::get('on-status/{id}', 'AdStatusController@onAdStatus')->name('on-status');
-    Route::get('off-status/{id}', 'AdStatusController@offAdStatus')->name('off-status');
+    Route::resource('ad-setting', 'AdSettingController');
+    Route::resource('ads', 'AdsController');
+    Route::resource('new-version', 'NewVersionController');
+
 
 });

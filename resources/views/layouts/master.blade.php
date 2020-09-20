@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Dashboard.</title>
+    <title>@yield('title').</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -126,18 +126,24 @@
                                 Dashboard
                             </a>
                         </li>
-                        <li class="app-sidebar__heading">Ad Status</li>
+                        <li class="app-sidebar__heading">Ad Setting</li>
                         <li>
-                            <a href="{{ route('ad-status.index') }}" class="@if (request()->is('ad-status'))  mm-active @endif">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                Ad Status
+                            <a href="{{ route('ad-setting.index') }}" class="@if (request()->is('ad-setting'))  mm-active @endif">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                Ad Setting
                             </a>
                         </li>
-                        <li class="app-sidebar__heading">Customize Banner</li>
                         <li>
-                            <a href="index.html" class="">
+                            <a href="{{ route('ads.index') }}" class="@if (request()->is('ads'))  mm-active @endif">
                                 <i class="fa fa-image" aria-hidden="true"></i>
-                                Customize Banner
+                                Ads
+                            </a>
+                        </li>
+                        <li class="app-sidebar__heading">New Version</li>
+                        <li>
+                            <a href="{{ route('new-version.index') }}" class="">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                New Version
                             </a>
                         </li>
                     </ul>
@@ -154,51 +160,30 @@
         <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     </div>
 </div>
-<script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script></body>
+<script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script>
+
+function openCustomizeOption(id){
+
+   var customize_banner_check = $("#customize_banner_check_"+id).is(":checked");
+
+   if (customize_banner_check == true){
+
+       $("#customize_banner_"+id).attr("hidden",false)
+       $("#others_"+id).attr("hidden",true)
+
+   }else {
+
+       $("#customize_banner_"+id).attr("hidden",true)
+       $("#others_"+id).attr("hidden",false)
+   }
+
+}
+
+</script>
+
+</body>
 </html>
 
 
-@foreach($adStatuses as $adStatus)
-
-    <div class="modal fade" id="exampleModal{{ $adStatus->id }}" role="dialog" style="z-index: 9999">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        <i class="fa fa-pen-square"></i> Edit Ad Status
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('ad-status.update', $adStatus->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <div class="position-relative form-group">
-                            <label for="app_id" class="">App ID</label>
-                            <input name="app_id" value="{{ old('app_id') }}" id="app_id" placeholder="App ID" type="text" class="form-control">
-                        </div>
-                        <div class="position-relative form-group">
-                            <label for="banner_id" class="">Banner ID</label>
-                            <input name="banner_id" value="{{ old('apbanner_idp_id') }}" id="banner_id" placeholder="Banner ID" type="text" class="form-control">
-                        </div>
-                        <div class="position-relative form-group">
-                            <label for="interstitial_id" class="">Interstitial ID</label>
-                            <input name="interstitial_id" value="{{ old('app_id') }}" id="interstitial_id" placeholder="Interstitial ID" type="text" class="form-control">
-                        </div>
-                        <div class="position-relative form-group">
-                            <label for="native_id" class="">Native ID</label>
-                            <input name="native_id" value="{{ old('native_id') }}" id="app_native_id" placeholder="Native ID" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-@endforeach

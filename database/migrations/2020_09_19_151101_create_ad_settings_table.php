@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdStatusDetailsTable extends Migration
+class CreateAdSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateAdStatusDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_status_details', function (Blueprint $table) {
+        Schema::create('ad_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('ad_status_id');
+            $table->string('name');
             $table->string('app_id')->nullable();
-            $table->string('banner_id')->nullable();
-            $table->string('interstitial_id')->nullable();
-            $table->string('native_id')->nullable();
+            $table->string('publisher_id')->nullable();
+            $table->boolean('status')->nullable(false);
             $table->timestamps();
-
-            $table->foreign('ad_status_id')->references('id')->on('ad_statuses');
         });
     }
 
@@ -33,6 +30,6 @@ class CreateAdStatusDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ad_status_details');
+        Schema::dropIfExists('ad_settings');
     }
 }

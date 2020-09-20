@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdStatusDetails extends Model
+class AdSetting extends Model
 {
     protected $guarded = ['id'];
 }

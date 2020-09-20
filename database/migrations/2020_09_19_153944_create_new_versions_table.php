@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdStatusesTable extends Migration
+class CreateNewVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateAdStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_statuses', function (Blueprint $table) {
+        Schema::create('new_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->boolean('status');
+            $table->string('version_title')->nullable();
+            $table->text('new_features')->nullable();
+            $table->float('version_code')->nullable();
+            $table->boolean('enable');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateAdStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ad_statuses');
+        Schema::dropIfExists('new_vesrions');
     }
 }

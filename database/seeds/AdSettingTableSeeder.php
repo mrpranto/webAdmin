@@ -1,9 +1,9 @@
 <?php
 
-use App\AdStatus;
+use App\AdSetting;
 use Illuminate\Database\Seeder;
 
-class AdStatusTableSeeder extends Seeder
+class AdSettingTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,13 +12,14 @@ class AdStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        $adStatuses = ['admob', 'fb'];
+        $names = ['Admob', 'Fb'];
 
-        foreach ($adStatuses as $adStatus){
 
-            AdStatus::create([
+        foreach ($names as $key => $name){
 
-                'name' => $adStatus,
+            AdSetting::create([
+
+                'name' => $name,
                 'status' => 0
 
             ]);
