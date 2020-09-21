@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Wide selection of forms controls, using the Bootstrap 4 code base, but built with React.">
     <meta name="msapplication-tap-highlight" content="no">
-    <link href="/assets/main.css" rel="stylesheet">
+    <link href="{{ asset('assets/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
@@ -65,5 +65,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/assets/scripts/main.js"></script></body>
+<script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script></body>
 </html>
