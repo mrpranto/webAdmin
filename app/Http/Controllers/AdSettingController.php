@@ -76,7 +76,7 @@ class AdSettingController extends Controller
         $request->validate([
 
             'app_id' => 'nullable|max:255',
-            'publisher_id' => 'required|max:255',
+            'publisher_id' => 'nullable|max:255',
 
         ]);
 
