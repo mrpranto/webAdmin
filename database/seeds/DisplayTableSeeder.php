@@ -16,8 +16,7 @@ class DisplayTableSeeder extends Seeder
 
             'Disable Ad ',
             'Google Admob Ad ',
-            'Facebook Network Audience Ad ',
-            'Both'
+            'Facebook Network Audience Ad '
         ];
 
         foreach ($names as $name){
