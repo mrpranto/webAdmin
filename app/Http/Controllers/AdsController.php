@@ -83,11 +83,13 @@ class AdsController extends Controller
             'display_type' => "nullable|max:255",
             'click_between' => "nullable|max:255",
 
-            'banner_image' => "required_if:customize_banner,1|image|dimensions:width=320,height=100",
+            'banner_image' => "image|dimensions:width=320,height=100",
             'banner_link' => "required_if:customize_banner,1",
             'banner_title' => "required_if:customize_banner,1",
 
         ]);
+
+        $ads = Ads::findOrFail($id);
 
 
         if ($request->customize_banner == 1){
@@ -95,6 +97,10 @@ class AdsController extends Controller
             $customizeBanner = customize_banner::where('ads_id', $id)->first();
 
             $image = $request->file('banner_image');
+
+            if ($customizeBanner == null && $request->banner_image == null){
+                return redirect()->back()->with('error', 'Please Select Image first.')->withInput();
+            }
 
 
             if ($customizeBanner == null){
@@ -112,20 +118,36 @@ class AdsController extends Controller
 
             }else{
 
-                if ($customizeBanner->image){
+                if ($image && $customizeBanner->image){
                     @unlink($customizeBanner->image);
+
+                    $filePath = $this->upload($request, $image);
+
+                    customize_banner::where('ads_id', $id)->update([
+
+                        'ads_id' => $id,
+                        'image' => $filePath,
+                        'title' => $request->banner_title,
+                        'link' => $request->banner_link,
+
+                    ]);
+
+                }else{
+
+                    $filePath = $customizeBanner->image;
+
+                    customize_banner::where('ads_id', $id)->update([
+
+                        'ads_id' => $id,
+                        'image' => $filePath,
+                        'title' => $request->banner_title,
+                        'link' => $request->banner_link,
+
+                    ]);
+
+
                 }
 
-                $filePath = $this->upload($request, $image);
-
-                customize_banner::where('id',$id)->update([
-
-                    'ads_id' => $id,
-                    'image' => $filePath,
-                    'title' => $request->banner_title,
-                    'link' => $request->banner_link,
-
-                ]);
 
             }
 
@@ -139,7 +161,7 @@ class AdsController extends Controller
 
         Ads::where('id', $id)->update([
 
-            'display_type_id' => $request->display_type,
+            'display_type_id' => $request->customize_banner ? 4 : $request->display_type,
             'admob_id' => $request->admob_id,
             'fb_id' => $request->fb_id,
             'click_between' => $request->click_between,

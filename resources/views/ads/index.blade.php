@@ -34,6 +34,13 @@
                 </div>
             @endif
 
+
+            @if (session()->get('error'))
+                <div class="alert alert-danger">
+                    <b><i class="fa fa-times-circle"></i> Error !</b> {{ session()->get('error') }}
+                </div>
+            @endif
+
         </div>
     </div>
 

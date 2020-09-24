@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdsTableSeeder::class);
         $this->call(DisplayTableSeeder::class);
         $this->call(NewVersionTableSeeder::class);
+        $this->call(CustomizeAddToDisplyTypeSeeder::class);
     }
 }

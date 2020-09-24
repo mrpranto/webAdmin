@@ -82,11 +82,6 @@ class AdSettingController extends Controller
 
         $adSettingIds = AdSetting::pluck('id');
 
-        if ($request->status == 1){
-            AdSetting::whereIn('id', $adSettingIds)->update([
-               'status' => 0
-            ]);
-        }
 
 
         AdSetting::where('id', $id)->update([
