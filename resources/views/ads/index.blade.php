@@ -48,7 +48,7 @@
 
         @foreach($ads as $ad)
 
-
+ @if ($ad->id != 2)
             <div class="col-md-6 col-sm-12">
                 <div class="main-card mb-3 card">
 
@@ -143,7 +143,7 @@
 
                 </div>
             </div>
-
+ @endif
 
         @endforeach
 
