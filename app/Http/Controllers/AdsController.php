@@ -83,7 +83,7 @@ class AdsController extends Controller
             'display_type' => "nullable|max:255",
             'click_between' => "nullable|max:255",
 
-            'banner_image' => "image|dimensions:width=320,height=100",
+            'banner_image' => "image",
             'banner_link' => "required_if:customize_banner,1",
             'banner_title' => "required_if:customize_banner,1",
 

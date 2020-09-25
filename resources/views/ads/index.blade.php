@@ -120,7 +120,11 @@
                                     <div class="position-relative form-group">
                                         <label for="exampleEmail" class="">{{ $ad->name }} Image</label>
                                         <input name="banner_image" type="file" class="form-control">
-                                        <small class="text-danger">image size must be width=320px and height=100px</small>
+                                        @if ($ad->id == 5)
+                                            <small class="text-danger">Image size must be width=400px and height=250px</small>
+                                        @else
+                                            <small class="text-danger">Image size must be width=320px and height=100px</small>
+                                        @endif
                                     </div>
 
                                     @if (optional($ad->customizeBanner)->image)
