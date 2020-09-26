@@ -141,9 +141,16 @@
                         </li>
                         <li class="app-sidebar__heading">New Version</li>
                         <li>
-                            <a href="{{ route('new-version.index') }}" class="">
+                            <a href="{{ route('new-version.index') }}" class="@if (request()->is('new-version'))  mm-active @endif">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 New Version
+                            </a>
+                        </li>
+                        <li class="app-sidebar__heading">Images</li>
+                        <li>
+                            <a href="{{ route('images.index') }}" class="@if (request()->is('images'))  mm-active @endif">
+                                <i class="fa fa-image" aria-hidden="true"></i>
+                                Images
                             </a>
                         </li>
                     </ul>

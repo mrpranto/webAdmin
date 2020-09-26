@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('ad-setting', 'AdSettingController');
     Route::resource('ads', 'AdsController');
     Route::resource('new-version', 'NewVersionController');
+    Route::resource('images', 'ImageUploadedController');
 
 
 });

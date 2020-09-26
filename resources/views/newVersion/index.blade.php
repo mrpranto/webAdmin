@@ -64,8 +64,15 @@
 
                                 <div class="position-relative form-group">
                                     <label for="exampleEmail" class="">Version Code</label>
-                                    <input name="version_code" value="{{ old('version_code') ?: $newVersion->version_code }}" type="number" class="form-control" maxlength="250">
+                                    <input name="version_code" value="{{ old('version_code') ?: $newVersion->version_code }}" type="text" class="form-control">
                                 </div>
+
+
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail" class="">Version Name</label>
+                                <input name="version_name" value="{{ old('version_name') ?: $newVersion->version_name }}" type="text" class="form-control">
+                            </div>
+
 
                             <div class="position-relative form-check form-ra-inline mb-3">
                                 <label class="form-check-label">
