@@ -23,6 +23,7 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api'], function (){
     Route::apiResource('/api-ad-setting', 'AdSettingApiController');
     Route::apiResource('/api-ads', 'AdsApiController');
     Route::apiResource('/api-new-version', 'NewVersionApiController');
+    Route::apiResource('/api-images', 'ImageApiController');
 
 });
 
