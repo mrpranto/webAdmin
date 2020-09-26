@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\new_version;
+use App\Images;
 use Illuminate\Http\Request;
 
-class NewVersionController extends Controller
+class ImageUploadedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,9 @@ class NewVersionController extends Controller
      */
     public function index()
     {
-        return view('newVersion.index', [
+        $images = Images::paginate(100);
 
-           'newVersion' => new_version::first()
-
-        ]);
+        return view('image.index', compact('images'));
     }
 
     /**
@@ -39,7 +37,34 @@ class NewVersionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+
+            'image.*' => 'required|image'
+
+        ]);
+
+        foreach ($request->image ?: [] as $key => $value){
+
+            $image = $request->file('image')[$key];
+            $filePath = "";
+            if (isset($image)) {
+                $fileName = uniqid().'.'.$image->getClientOriginalExtension();
+                $directory = './uploads/images/';
+                $image->move($directory,$fileName);
+                $filePath = $directory.$fileName;
+            }
+
+            Images::create([
+
+                'image_path' => $filePath
+
+            ]);
+
+        }
+
+        return redirect()->back()->with('success', 'Image Uploaded Successful.');
+
     }
 
     /**
@@ -50,7 +75,7 @@ class NewVersionController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -73,27 +98,7 @@ class NewVersionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-
-            'version_title' => 'required|max:255',
-            'new_features' => 'required',
-            'version_code' => 'required',
-            'version_name' => 'required',
-
-        ]);
-
-        new_version::where('id', $id)->update([
-
-            'version_title' => $request->version_title,
-            'new_features' => $request->new_features,
-            'version_code' => $request->version_code,
-            'version_name' => $request->version_name,
-            'enable' => $request->enable ?: 0,
-
-        ]);
-
-        return redirect()->back()->with('success', 'New Version Data update successful');
-
+        //
     }
 
     /**
@@ -104,6 +109,13 @@ class NewVersionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Images::findOrFail($id);
+
+        @unlink($image->image_path);
+
+        $image->delete();
+
+        return redirect()->back()->with('success', 'Image Delete Successful.');
+
     }
 }
